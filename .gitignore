@@ -12,7 +12,15 @@ tarballs/
 test-results/
 
 
+.vscode
+bin
+obj
+*.db
 appsettings.json
+wwwroot
+
+appsettings.json
+appsettings.Development.json
 
 # Mac bundle stuff
 *.dmg
