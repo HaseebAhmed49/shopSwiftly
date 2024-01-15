@@ -414,3 +414,6 @@ ASALocalRun/
 
 # Local History for Visual Studio
 .localhistory/
+API/appsettings.Development.json
+API/appsettings.json
+API/Database/shopSwiftly.db
