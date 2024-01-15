@@ -25,11 +25,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Entities\" />
-    <None Remove="Data\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Entities\" />
-    <Folder Include="Data\" />
+    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
   </ItemGroup>
 </Project>
