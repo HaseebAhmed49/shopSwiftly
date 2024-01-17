@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using Core.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,10 +14,15 @@ namespace Infrastructure.Data
 
 		public DbSet<Product> Products { get; set; }
 
-		// Not using at the moment - 17-01-2024
-//		public DbSet<ProductBrand> ProductBrands { get; set; }
+		public DbSet<ProductBrand> ProductBrands { get; set; }
 
 		public DbSet<ProductType> ProductTypes { get; set; }
-	}
-}
 
+		// this will get the updated properties from the Infrastruture/Data/Config/ProductConfiguration
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+			modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+        }
+    }
+}
