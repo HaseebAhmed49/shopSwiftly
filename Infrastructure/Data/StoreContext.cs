@@ -12,6 +12,11 @@ namespace Infrastructure.Data
 		}
 
 		public DbSet<Product> Products { get; set; }
+
+		// Not using at the moment - 17-01-2024
+//		public DbSet<ProductBrand> ProductBrands { get; set; }
+
+		public DbSet<ProductType> ProductTypes { get; set; }
 	}
 }
 
