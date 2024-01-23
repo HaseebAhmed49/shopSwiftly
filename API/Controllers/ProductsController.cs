@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Core.Interfaces;
 using Core.Specifications;
+using API.DTOs;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -25,18 +26,37 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Product>>> GetProducts()
+        public async Task<ActionResult<List<ProductToReturnDTO>>> GetProducts()
         {
             var spec = new ProductWithTypesAndBrandsSpecification();
             var products = await _productRepo.ListAsync(spec);
-            return Ok(products);
+            return products.Select(product => new ProductToReturnDTO
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Description = product.Description,
+                PictureUrl = product.PictureUrl,
+                Price = product.Price,
+                ProductBrand = product.ProductBrand.Name,
+                ProductType = product.ProductType.Name
+            }).ToList();
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Product>> GetProduct(int id)
+        public async Task<ActionResult<ProductToReturnDTO>> GetProduct(int id)
         {
             var spec = new ProductWithTypesAndBrandsSpecification(id);
-            return await _productRepo.GetEntityWithSpec(spec);
+            var product = await _productRepo.GetEntityWithSpec(spec);
+            return new ProductToReturnDTO
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Description = product.Description,
+                PictureUrl = product.PictureUrl,
+                Price = product.Price,
+                ProductBrand = product.ProductBrand.Name,
+                ProductType = product.ProductType.Name
+            };
         }
 
         [HttpGet("brands")]
