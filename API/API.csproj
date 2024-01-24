@@ -40,9 +40,15 @@
   <ItemGroup>
     <None Remove="DTOs\" />
     <None Remove="Helpers\" />
+    <None Remove="Errors\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DTOs\" />
     <Folder Include="Helpers\" />
+    <Folder Include="wwwroot\" />
+    <Folder Include="Errors\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="wwwroot\" />
   </ItemGroup>
 </Project>

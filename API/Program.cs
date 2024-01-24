@@ -24,6 +24,10 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+
+// Hidden middleware to see Developer Exception Page because once we are in production, we are unable to see this errors.
+app.UseStatusCodePagesWithReExecute("/errors/{0}");
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -31,6 +35,8 @@ if (app.Environment.IsDevelopment())
 }
 
 //app.UseHttpsRedirection();
+// This will show the static files such as images
+app.UseStaticFiles();
 
 app.UseAuthorization();
 
