@@ -41,12 +41,14 @@
     <None Remove="DTOs\" />
     <None Remove="Helpers\" />
     <None Remove="Errors\" />
+    <None Remove="Middleware\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DTOs\" />
     <Folder Include="Helpers\" />
     <Folder Include="wwwroot\" />
     <Folder Include="Errors\" />
+    <Folder Include="Middleware\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\" />
