@@ -35,7 +35,6 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
         .SelectMany(x => x.Value.Errors)
         .Select(x => x.ErrorMessage).ToArray();
 
-
         var errorResponse = new ApiValidationErrorResponse
         {
             Errors = errors
@@ -55,11 +54,12 @@ app.UseMiddleware<ExceptionMiddleware>();
 // Hidden middleware to see Developer Exception Page because once we are in production, we are unable to see this errors.
 app.UseStatusCodePagesWithReExecute("/errors/{0}");
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+//// Commenting this if statement as this app will not be target for production
+//if (app.Environment.IsDevelopment())
+//{
+app.UseSwagger();
+app.UseSwaggerUI();
+//}
 
 //app.UseHttpsRedirection();
 // This will show the static files such as images
