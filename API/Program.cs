@@ -1,48 +1,16 @@
-using API.Errors;
+using API.Extensions;
 using API.Middleware;
-using Core.Interfaces;
 using Infrastructure.Data;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
-// HA: Adding DB Context and relevant Connection String
-builder.Services.AddDbContext<StoreContext>(opt =>
-{
-    opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
-});
-builder.Services.AddScoped<IProductRepository, ProductRepository>();
-builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-// It will find the Mapping Profiles file and attach with the automappter because it is inherited from Profile Class from Auto Mapper
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+// Added all the things from below to AddApplicationServices static class
+builder.Services.AddApplicationServices(builder.Configuration);
 
-// Validation Errors if we remove ApiController tag, we dont know what type of error is.
-// This is to improve ApiController Validation Errors
-builder.Services.Configure<ApiBehaviorOptions>(options =>
-{
-    options.InvalidModelStateResponseFactory = actionContext =>
-    {
-        var errors = actionContext.ModelState
-        .Where(e => e.Value.Errors.Count > 0)
-        .SelectMany(x => x.Value.Errors)
-        .Select(x => x.ErrorMessage).ToArray();
-
-        var errorResponse = new ApiValidationErrorResponse
-        {
-            Errors = errors
-        };
-
-        return new BadRequestObjectResult(errorResponse);
-    };
-});
 
 var app = builder.Build();
 

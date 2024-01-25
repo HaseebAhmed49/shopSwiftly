@@ -42,6 +42,7 @@
     <None Remove="Helpers\" />
     <None Remove="Errors\" />
     <None Remove="Middleware\" />
+    <None Remove="Extensions\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DTOs\" />
@@ -49,6 +50,7 @@
     <Folder Include="wwwroot\" />
     <Folder Include="Errors\" />
     <Folder Include="Middleware\" />
+    <Folder Include="Extensions\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\" />
